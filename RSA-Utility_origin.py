@@ -24,12 +24,12 @@ def create_private_public_pem(bit,label2):
         rand = make_rand()
         filePath = []
 
-        private_filePath = os.path.dirname(os.path.realpath(__file__)) + '\\' + rand + '_' + 'private_key' + '.pem'
+        private_filePath = os.getcwd() + '\\' + rand + '_' + 'private_key' + '.pem'
         with open(private_filePath,'wb+') as f:
             f.write(private_key.exportKey('PEM'))
             filePath.append(private_filePath)
             
-        public_filePath = os.path.dirname(os.path.realpath(__file__)) + '\\' + rand + '_' + 'public_key' + '.pem'
+        public_filePath = os.getcwd() + '\\' + rand + '_' + 'public_key' + '.pem'
         with open(public_filePath,'wb+') as f:
             f.write(public_key.exportKey('PEM'))
             filePath.append(public_filePath)
@@ -42,13 +42,13 @@ def create_private_public_pem(bit,label2):
 
 
 def extract_key(label2):
-    file_path = filedialog.askopenfilename(initialdir=os.path.dirname(os.path.realpath(__file__)),title='파일선택',filetypes=(('pem files','*.pem'),('all files','*.*')))
+    file_path = filedialog.askopenfilename(initialdir=os.getcwd(),title='파일선택',filetypes=(('pem files','*.pem'),('all files','*.*')))
     
     f = open(file_path,'r')
     num_key = RSA.import_key(f.read())
     f.close()
     try:
-        extract_filePath = os.path.dirname(os.path.realpath(__file__)) + '\\' + os.path.basename(file_path)[0:17] + 'extract_' + os.path.basename(file_path)[17:-4] + '.txt'
+        extract_filePath = os.getcwd() + '\\' + os.path.basename(file_path)[0:17] + 'extract_' + os.path.basename(file_path)[17:-4] + '.txt'
         f = open(extract_filePath,'w+')
 
         try:
@@ -108,7 +108,7 @@ def extract_key_window():
 
 def encrypt(m,e,n,label):
     rand = make_rand()
-    filePath = os.path.dirname(os.path.realpath(__file__)) + '\\' + rand + '_encrypt_data.txt'
+    filePath = os.getcwd() + '\\' + rand + '_encrypt_data.txt'
     try:
         c = pow(int(m),int(e),int(n))
         with open(filePath,'w+') as f:
@@ -121,7 +121,7 @@ def encrypt(m,e,n,label):
 
 def decrypt(c,d,n,label):
     rand = make_rand()
-    filePath = os.path.dirname(os.path.realpath(__file__)) + '\\' + rand + '_decrypt_data.txt'
+    filePath = os.getcwd() + '\\' + rand + '_decrypt_data.txt'
     try:
         m = pow(int(c),int(d),int(n))
         with open(filePath,'w+') as f:
@@ -134,7 +134,7 @@ def decrypt(c,d,n,label):
 
 def open_pem(textbox):
     try:
-        filePath = filedialog.askopenfilename(initialdir=os.path.dirname(os.path.realpath(__file__)),title='파일선택',filetypes=(('pem files','*.pem'),('all files','*.*')))
+        filePath = filedialog.askopenfilename(initialdir=os.getcwd(),title='파일선택',filetypes=(('pem files','*.pem'),('all files','*.*')))
         textbox.insert(0,filePath)
     except:
         textbox.insert(0,'Error... try again')
@@ -143,7 +143,7 @@ def open_pem(textbox):
 
 def encrypt_pem(m, pem_file_path,label):
     rand = make_rand()
-    filePath = os.path.dirname(os.path.realpath(__file__)) + '\\' + rand + '_encrypt_data.txt'
+    filePath = os.getcwd() + '\\' + rand + '_encrypt_data.txt'
     try:
         with open(pem_file_path,'r') as f:
             key = RSA.import_key(f.read())
@@ -161,7 +161,7 @@ def encrypt_pem(m, pem_file_path,label):
 
 def decrypt_pem(c, pem_file_path,label):
     rand = make_rand()
-    filePath = os.path.dirname(os.path.realpath(__file__)) + '\\' + rand + '_decrypt_data.txt'
+    filePath = os.getcwd() + '\\' + rand + '_decrypt_data.txt'
     try:
         with open(pem_file_path,'r') as f:
             key = RSA.import_key(f.read())
@@ -249,7 +249,7 @@ def convert_string_to_bytes(string,label):
     try:
         str_bytes = bytes(string.encode())
         res = bytes_to_long(str_bytes)
-        filePath = os.path.dirname(os.path.realpath(__file__)) + '\\' + rand + '_convert_bytes.txt'
+        filePath = os.getcwd() + '\\' + rand + '_convert_bytes.txt'
         with open(filePath,'w+') as f:
             f.write('Convert bytes : '+str(res)+'\n')
         label.config(text='Convert Success')
@@ -356,7 +356,7 @@ def convert_bytes_to_string(bytes,label):
     rand = make_rand()
     try:
         string = str(long_to_bytes(bytes))[2:-1]
-        filePath = os.path.dirname(os.path.realpath(__file__)) + '\\' + rand + '_convert_string.txt'
+        filePath = os.getcwd() + '\\' + rand + '_convert_string.txt'
         with open(filePath,'w+') as f:
             f.write('Convert string : '+string+'\n')
         label.config(text='Convert Success')
@@ -403,7 +403,7 @@ def create_private_public_key(bit,label2):
     try:
         rand = make_rand()
 
-        private_filePath = os.path.dirname(os.path.realpath(__file__)) + '\\' + rand + '_' + 'private_key' + '.txt'
+        private_filePath = os.getcwd() + '\\' + rand + '_' + 'private_key' + '.txt'
 
         f = open(private_filePath,'w+')
         f.write('p = '+str(p)+'\n\n')
@@ -414,7 +414,7 @@ def create_private_public_key(bit,label2):
         f.write('u = '+str(u)+'\n\n')
         f.close()
 
-        public_filePath = os.path.dirname(os.path.realpath(__file__)) + '\\' + rand + '_' + 'public_key' + '.txt'
+        public_filePath = os.getcwd() + '\\' + rand + '_' + 'public_key' + '.txt'
 
         f = open(public_filePath,'w+')
         f.write('n = '+str(n)+'\n\n')
