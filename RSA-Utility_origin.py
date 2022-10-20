@@ -8,7 +8,9 @@ from Crypto.Util.number import bytes_to_long, long_to_bytes
 
 
 
+
 class Utils:
+    
     def make_rand():
         table = "0123456789abcdef"
         res = ''
@@ -226,8 +228,10 @@ class Utils:
             label.config(text='Convert fail... try again')
 
 
+            
 
 class Windows:
+    
     def extract_key_window():
         instance_window = Toplevel()
         global label2
